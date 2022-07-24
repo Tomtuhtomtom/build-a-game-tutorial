@@ -13,14 +13,13 @@
         <canvas id="myCanvas" width="480" height="320"></canvas>
 
         <script>
-            //Canvas
+
             var canvas = document.getElementById("myCanvas");
             var ctx = canvas.getContext("2d");
 
-            //Scoring
             var score = 0;
+            var lives = 3;
 
-            //Dimension Variables
             var ballRadius = 10;
             var paddleHeight = 10;
             var paddleWidth = 75;
@@ -40,7 +39,6 @@
                     }
                 }
 
-            //Movement Variables
             var rightPressed = false;
             var leftPressed = false;
             
@@ -49,7 +47,6 @@
             let dx = 2;
             let dy = -2;  
 
-            // Drawings
             function drawBall() {
                 ctx.beginPath();
                 ctx.arc(x, y, ballRadius, 0, Math.PI*2);
@@ -90,8 +87,8 @@
                 drawBall();
                 drawPaddle();
                 drawScore();
+                drawLives();
                 collisionDetection();
-                // Bounce off walls check
                 if(x + dx > canvas.width-ballRadius || x + dx < ballRadius) {
                     dx = -dx;
                 }
@@ -103,15 +100,24 @@
                         dy = -dy;
                 }
                 else {
-                    alert("GAME OVER");
-                    document.location.reload();
-                    clearInterval(interval); // Needed for Chrome to end game
+                    lives--;
+                    if(!lives) {
+                        alert("GAME OVER");
+                        document.location.reload();
+                    }
+                    else {
+                        x = canvas.width/2;
+                        y = canvas.height-30;
+                        dx = 2;
+                        dy = -2;
+                        paddleX = (canvas.width-paddleWidth)/2;
+                    }
                 }
-            }
+                }
                 x += dx;
                 y += dy;
+                requestAnimationFrame(draw);
 
-                //Paddle movement
                 if(rightPressed) {
                     paddleX += 7;
                     if (paddleX + paddleWidth > canvas.width){
@@ -124,7 +130,7 @@
                         paddleX = 0;
                     }
                 }
-                }
+            }
 
                 document.addEventListener("keydown", keyDownHandler, false);
                 document.addEventListener("keyup", keyUpHandler, false);
@@ -167,7 +173,6 @@
                                     if(score == brickRowCount*brickColumnCount) {
                                         alert("YOU WIN, CONGRATULATIONS!");
                                         document.location.reload();
-                                        clearInterval(interval); // Needed for Chrome to end game
                                     }
                                 }
                             }
@@ -181,7 +186,13 @@
                     ctx.fillText("Score: "+score, 8, 20);
                 }
 
-            var interval = setInterval(draw, 10);
+                function drawLives() {
+                    ctx.font = "16px Arial";
+                    ctx.fillStyle = "#0095DD";
+                    ctx.fillText("Lives: "+lives, canvas.width-65, 20);
+                }
+
+            draw();
 
         </script>
 
