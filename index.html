@@ -4,13 +4,29 @@
         <meta charset="utf-8" />
         <title>Gamedev Canvas Workshop</title>
         <style>
+            body {
+                background: black;
+            }
+
+            h1 {
+                color: rgb(232, 7, 195);
+                font-family:'Lucida Grande';
+                font-size: 50px;
+                text-align: center;
+            }
             * { padding: 0; margin: 0; }
-            canvas { background: #eee; display: block; margin: 0 auto; }
+            canvas { 
+                background-image: url('gamebground.jpeg');
+                /* background-position: absolute; */
+                background-size: cover; 
+                display: block; 
+                margin: 0 auto; 
+            }
         </style>
     </head>
     <body>
-
-        <canvas id="myCanvas" width="480" height="320"></canvas>
+            <h1>BREAKOUT</h1>
+        <canvas id="myCanvas" width="592" height="333"></canvas>
 
         <script>
 
@@ -18,7 +34,7 @@
             var ctx = canvas.getContext("2d");
 
             var score = 0;
-            var lives = 3;
+            var lives = 300;
 
             var ballRadius = 10;
             var paddleHeight = 10;
