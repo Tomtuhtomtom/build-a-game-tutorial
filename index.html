@@ -192,8 +192,8 @@
                                     b.status = 0;
                                     var breakSound = new Audio('beep1.wav');
                                     breakSound.play();
-                                    score++;
-                                    if(score == brickRowCount*brickColumnCount) {
+                                    score+=1000;
+                                    if(score == brickRowCount*brickColumnCount*1000) {
                                         alert("YOU WIN, CONGRATULATIONS!");
                                         var winSound = new Audio('applause.wav');
                                         winSound.play();
