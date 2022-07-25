@@ -38,7 +38,7 @@
             var lives = 5;
 
             var ballRadius = 8;
-            var paddleHeight = 15;
+            var paddleHeight = 12;
             var paddleWidth = 75;
             var paddleX = (canvas.width-paddleWidth) / 2;
             var brickRowCount = 3;
@@ -115,11 +115,15 @@
                 else if(y + dy > canvas.height-ballRadius) {
                     if(x > paddleX && x < paddleX + paddleWidth) {
                         dy = -dy;
+                        var paddleSound = new Audio('beep4.wav');
+                        paddleSound.play();
                 }
                 else {
                     lives--;
                     if(!lives) {
                         alert("GAME OVER");
+                        var loseSound = new Audio('boink3.wav');
+                        loseSound.play();
                         document.location.reload();
                     }
                     else {
@@ -186,9 +190,13 @@
                                 if(x > b.x && x < b.x+brickWidth && y > b.y && y < b.y+brickHeight) {
                                     dy = -dy;
                                     b.status = 0;
+                                    var breakSound = new Audio('beep1.wav');
+                                    breakSound.play();
                                     score++;
                                     if(score == brickRowCount*brickColumnCount) {
                                         alert("YOU WIN, CONGRATULATIONS!");
+                                        var winSound = new Audio('applause.wav');
+                                        winSound.play();
                                         document.location.reload();
                                     }
                                 }
