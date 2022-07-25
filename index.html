@@ -9,15 +9,16 @@
             }
 
             h1 {
-                color: rgb(232, 7, 195);
+                background: -webkit-linear-gradient(#E807C3, #000000);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
                 font-family:'Lucida Grande';
-                font-size: 50px;
+                font-size: 60px;
                 text-align: center;
             }
             * { padding: 0; margin: 0; }
             canvas { 
                 background-image: url('gamebground.jpeg');
-                /* background-position: absolute; */
                 background-size: cover; 
                 display: block; 
                 margin: 0 auto; 
@@ -34,19 +35,19 @@
             var ctx = canvas.getContext("2d");
 
             var score = 0;
-            var lives = 300;
+            var lives = 5;
 
-            var ballRadius = 10;
-            var paddleHeight = 10;
+            var ballRadius = 8;
+            var paddleHeight = 15;
             var paddleWidth = 75;
             var paddleX = (canvas.width-paddleWidth) / 2;
             var brickRowCount = 3;
-            var brickColumnCount = 5;
+            var brickColumnCount = 6;
             var brickWidth = 75;
             var brickHeight = 20;
             var brickPadding = 10;
             var brickOffsetTop = 30;
-            var brickOffsetLeft = 30;
+            var brickOffsetLeft = 40;
             var bricks = [];
                 for(var c=0; c<brickColumnCount; c++) {
                     bricks[c] = [];
@@ -60,8 +61,8 @@
             
             let x = canvas.width/2;
             let y = canvas.height-30;
-            let dx = 2;
-            let dy = -2;  
+            let dx = 4;
+            let dy = -4;  
 
             function drawBall() {
                 ctx.beginPath();
@@ -124,8 +125,8 @@
                     else {
                         x = canvas.width/2;
                         y = canvas.height-30;
-                        dx = 2;
-                        dy = -2;
+                        dx = 4;
+                        dy = -4;
                         paddleX = (canvas.width-paddleWidth)/2;
                     }
                 }
